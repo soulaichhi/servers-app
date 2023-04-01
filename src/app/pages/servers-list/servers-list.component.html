@@ -18,12 +18,10 @@
       </div>
     </div>
     <div class="grid">
-      <div class="lg:col-3 md:col-6 sm:col-12">
-        <app-server-item></app-server-item>
+      <div class="lg:col-3 md:col-6 sm:col-12" *ngFor="let server of serversList">
+        <app-server-item [serverInfo]="server"></app-server-item>
       </div>
-      <div class="lg:col-3 md:col-6 sm:col-12">
-        <app-server-item></app-server-item>
-      </div>
+
     </div>
   </p-card>
 </div>

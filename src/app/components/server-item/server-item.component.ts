@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Server} from "../../models/server.model";
 
 @Component({
   selector: 'app-server-item',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./server-item.component.scss']
 })
 export class ServerItemComponent {
+  @Input() serverInfo!: Server;
 
 }
