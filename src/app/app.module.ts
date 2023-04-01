@@ -7,18 +7,24 @@ import { ServerItemComponent } from './components/server-item/server-item.compon
 import { ServersListComponent } from './pages/servers-list/servers-list.component';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
-import {ButtonModule} from "primeng/button";
+import { ButtonModule } from 'primeng/button';
 import { ServerDetailComponent } from './pages/server-detail/server-detail.component';
 import { PanelModule } from 'primeng/panel';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
+import { ServerFormComponent } from './pages/server-form/server-form.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   declarations: [
     AppComponent,
     ServerItemComponent,
     ServersListComponent,
-    ServerDetailComponent
+    ServerDetailComponent,
+    ServerFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +35,12 @@ import {HttpClientModule} from "@angular/common/http";
     ToolbarModule,
     ButtonModule,
     PanelModule,
-    InputSwitchModule
+    InputSwitchModule,
+    InputTextModule,
+    InputMaskModule,
+    TableModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
