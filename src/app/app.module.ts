@@ -8,21 +8,28 @@ import { ServersListComponent } from './pages/servers-list/servers-list.componen
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
-import { TreeModule } from 'primeng/tree';
-
+import { ServerDetailComponent } from './pages/server-detail/server-detail.component';
+import { PanelModule } from 'primeng/panel';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { InputSwitchModule } from 'primeng/inputswitch';
+import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
     ServerItemComponent,
-    ServersListComponent
+    ServersListComponent,
+    ServerDetailComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     CardModule,
     ToolbarModule,
     ButtonModule,
-    TreeModule
+    PanelModule,
+    InputSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

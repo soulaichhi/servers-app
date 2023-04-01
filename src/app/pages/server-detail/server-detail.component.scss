@@ -1,0 +1,14 @@
+.header-tools{
+  display: flex;
+  column-gap: 16px;
+  margin-left: 35px;
+}
+
+.body-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span {
+    display: block;
+  }
+}
