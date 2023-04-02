@@ -1,8 +1,8 @@
-import {Site} from "./site.model";
+import { Site } from './site.model';
 
-export class Server{
+export class Server {
   id?: number;
   name?: string;
-  ipAddress?:string;
-  sites?: Site;
+  ipAddress?: string;
+  sites?: Site[];
 }

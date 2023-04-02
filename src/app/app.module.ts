@@ -17,6 +17,7 @@ import { ServerFormComponent } from './pages/server-form/server-form.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     InputMaskModule,
     TableModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

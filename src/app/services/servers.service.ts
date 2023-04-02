@@ -1,17 +1,34 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Server} from "../models/server.model";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Server } from '../models/server.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServersService {
+  baseUrl = 'http://localhost:3000/servers';
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-  getServers():Observable<Server[]>{
-    const url = '../../assets/data/dummy-data.json';
-    return this.http.get<Server[]>(url);
+  getServers(): Observable<Server[]> {
+    return this.http.get<Server[]>(this.baseUrl);
   }
+
+  //
+  getServerById(id: string): Observable<Server> {
+    return this.http.get<Server>(`${this.baseUrl}/${id}`);
+  }
+
+  // updateServerById(serverId: number, serverData: any): Observable<Server> {
+  //   return this.http.put<Server>(`${this.url}/${serverId}`, serverData);
+  // }
+
+  // createServer(server: Server): Observable<Server> {
+  //   return this.http.post<Server>(this.url, server);
+  // }
+
+  // deleteServer(serverId: string): Observable<object> {
+  //   return this.http.delete<object>(`${this.url}/${serverId}`);
+  // }
 }

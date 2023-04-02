@@ -1,16 +1,29 @@
 <div class="server-item">
-  <p-card class="server-item-card" [header]="serverInfo.name!" [subheader]="serverInfo.ipAddress!">
+  <p-card
+    [header]="serverInfo.name!"
+    [subheader]="serverInfo.ipAddress!"
+    class="server-item-card"
+  >
     <ul class="server-item-sites">
-      <li class="server-item-sites-site" >
+      <li *ngFor="let site of serverInfo.sites" class="server-item-sites-site">
         <span><i class="pi pi-chevron-right"></i></span>
-        <span>site Name {{'hihi'}}</span>
+        <span>site Name {{ site.name }}</span>
       </li>
-
     </ul>
     <div class="server-item-tools">
-      <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger"></p-button>
-      <p-button icon="pi pi-eye" styleClass="p-button-rounded"></p-button>
-      <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-success"></p-button>
+      <p-button
+        icon="pi pi-trash"
+        styleClass="p-button-rounded p-button-danger"
+      ></p-button>
+      <p-button
+        (onClick)="goToServerDetail(serverInfo.id!)"
+        icon="pi pi-eye"
+        styleClass="p-button-rounded"
+      ></p-button>
+      <p-button
+        icon="pi pi-pencil"
+        styleClass="p-button-rounded p-button-success"
+      ></p-button>
     </div>
   </p-card>
 </div>
