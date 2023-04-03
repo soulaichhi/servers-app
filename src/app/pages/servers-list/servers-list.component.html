@@ -22,7 +22,39 @@
         *ngFor="let server of serversList"
         class="lg:col-3 md:col-6 sm:col-12"
       >
-        <app-server-item [server]="server"></app-server-item>
+        <div class="server-item">
+          <p-card
+            [header]="server.name!"
+            [subheader]="server.ipAddress!"
+            class="server-item-card"
+          >
+            <ul class="server-item-sites">
+              <li
+                *ngFor="let site of server.sites"
+                class="server-item-sites-site"
+              >
+                <span><i class="pi pi-chevron-right"></i></span>
+                <span> {{ site.name }}</span>
+              </li>
+            </ul>
+            <div class="server-item-tools">
+              <p-button
+                (onClick)="removeServer(server.id!)"
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger"
+              ></p-button>
+              <p-button
+                (onClick)="goToServerDetail(server.id!)"
+                icon="pi pi-eye"
+                styleClass="p-button-rounded"
+              ></p-button>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-success"
+              ></p-button>
+            </div>
+          </p-card>
+        </div>
       </div>
     </div>
   </p-card>

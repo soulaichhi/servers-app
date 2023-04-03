@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Server } from '../models/server.model';
+import { Site } from '../models/site.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +25,11 @@ export class ServersService {
   //   return this.http.put<Server>(`${this.url}/${serverId}`, serverData);
   // }
 
-  // createServer(server: Server): Observable<Server> {
-  //   return this.http.post<Server>(this.url, server);
-  // }
+  createServer(server: Server): Observable<Server> {
+    return this.http.post<Server>(this.baseUrl, server);
+  }
 
-  // deleteServer(serverId: string): Observable<object> {
-  //   return this.http.delete<object>(`${this.url}/${serverId}`);
-  // }
+  deleteServer(id: number): Observable<object> {
+    return this.http.delete<object>(`${this.baseUrl}/${id}`);
+  }
 }

@@ -1,0 +1,4 @@
+{
+  "/servers/:id/sites": "/servers/:id/sites",
+  "/servers/:id/sites/:id": "/servers/:id/sites/:id"
+}
