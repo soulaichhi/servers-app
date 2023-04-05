@@ -8,6 +8,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ServerFormComponent {
   serverForm: FormGroup;
+  editMode = false;
 
   constructor(private fb: FormBuilder) {
     this.serverForm = this.fb.group({
@@ -41,4 +42,6 @@ export class ServerFormComponent {
   onSubmit() {
     console.log(this.serverForm.value);
   }
+
+  goBack() {}
 }

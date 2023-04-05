@@ -1,49 +1,139 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="serverForm">
-  <p>
-    <label for="serverName">server Name </label>
-    <input
-      formControlName="serverName"
-      id="serverName"
-      name="serverName"
-      type="text"
-    />
-  </p>
-  <p>
-    <label for="serverIpAddress">server Ip Address </label>
-    <input
-      formControlName="serverIpAddress"
-      id="serverIpAddress"
-      name="serverIpAddress"
-      type="text"
-    />
-  </p>
-
-  sites:
-  <div formArrayName="sites">
-    <div *ngFor="let site of sites.controls; let i = index">
-      <div [formGroupName]="i">
-        {{ i }}
-        siteName :
-        <input formControlName="siteName" type="text" />
-        domainName:
-        <input formControlName="domainName" type="text" />
-        ipAddress :
-        <input formControlName="ipAddress" type="text" />
-        active:
-        <p-inputSwitch formControlName="active"></p-inputSwitch>
-
-        <button (click)="removeSite(i)">Remove</button>
+<!--<p-toast></p-toast>-->
+<div>
+  <p-card
+    [header]="editMode ? 'Edit Server' : 'Add Server'"
+    subheader="You can add or edit Server"
+  >
+    <div class="grid mb-5">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <button
+              (click)="onSubmit()"
+              [label]="editMode ? 'Update' : 'Create'"
+              class="p-button-success mr-2"
+              icon="pi pi-plus"
+              pButton
+              type="button"
+            ></button>
+            <button
+              (click)="goBack()"
+              class="p-button-primary"
+              icon="pi pi-arrow-circle-left"
+              label="Cancel"
+              pButton
+              type="button"
+            ></button>
+          </div>
+        </p-toolbar>
       </div>
     </div>
-  </div>
+    <div class="grid">
+      <div class="col-12">
+        <form (ngSubmit)="onSubmit()" [formGroup]="serverForm">
+          <div class="card">
+            <div class="grid formgrid">
+              <div class="field col-3">
+                <label for="serverName">server Name </label>
+                <input
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  formControlName="serverName"
+                  id="serverName"
+                  name="serverName"
+                  type="text"
+                />
+                <small class="p-error">Name is Required</small>
+              </div>
+              <div class="field col-3">
+                <label for="serverIpAddress">server Ip Address </label>
+                <input
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  formControlName="serverIpAddress"
+                  id="serverIpAddress"
+                  name="serverIpAddress"
+                  type="text"
+                />
+                <small class="p-error">server Ip Address</small>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <h3>sites:</h3>
+          <hr />
+          <div class="card" formArrayName="sites">
+            <div
+              *ngFor="let site of sites.controls; let i = index"
+              class="grid formgrid"
+            >
+              <ng-container [formGroupName]="i">
+                <div class="field col-2">
+                  <label for="siteName">site Name </label>
+                  <input
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    formControlName="siteName"
+                    id="siteName"
+                    name="siteName"
+                    type="text"
+                  />
+                  <small class="p-error">site Name is Required</small>
+                </div>
+                <div class="field col-3">
+                  <label for="domainName">domain Name </label>
+                  <input
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    formControlName="domainName"
+                    id="domainName"
+                    name="domainName"
+                    type="text"
+                  />
+                  <small class="p-error">domain Name is Required</small>
+                </div>
+                <div class="field col-3">
+                  <label for="ipAddress">ip Address </label>
+                  <input
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    formControlName="ipAddress"
+                    id="ipAddress"
+                    name="ipAddress"
+                    type="text"
+                  />
+                  <small class="p-error">ipAddress is Required</small>
+                </div>
+                <div class="field col-2">
+                  <label for="active">Active </label><br />
+                  <p-inputSwitch
+                    formControlName="active"
+                    id="active"
+                    name="active"
+                  ></p-inputSwitch>
+                </div>
+                <div class="field col-2">
+                  <span></span><br />
+                  <button
+                    (click)="removeSite(i)"
+                    class="mr-2"
+                    icon="pi pi-trash"
+                    pButton
+                  ></button>
+                  <button icon="pi pi-pencil" pButton></button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <button
+      (click)="addSites()"
+      icon="pi pi-plus"
+      label="Add"
+      pButton
+      type="button"
+    ></button>
+  </p-card>
+</div>
 
-  <p>
-    <button type="submit">Submit</button>
-  </p>
-</form>
-
-<p>
-  <button (click)="addSites()" type="button">Add</button>
-</p>
+<p></p>
 
 {{ this.serverForm.value | json }}
