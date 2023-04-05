@@ -4,6 +4,8 @@ import { Server } from '../../models/server.model';
 import { Location } from '@angular/common';
 import { ServersService } from '../../services/servers.service';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-server-form',
@@ -12,15 +14,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServerFormComponent implements OnInit {
   serverForm!: FormGroup;
-  editMode = false;
   isSubmitted = false;
-  serverId!: string;
 
   constructor(
     private fb: FormBuilder,
     private location: Location,
     private serverService: ServersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {}
 
   get sites(): FormArray {
@@ -33,7 +34,6 @@ export class ServerFormComponent implements OnInit {
       ipAddress: '',
       sites: this.fb.array([]),
     });
-    this._checkEditMode();
   }
 
   newSite(): FormGroup {
@@ -62,11 +62,8 @@ export class ServerFormComponent implements OnInit {
     //console.log(this.serverForm.value);
     const server: Server = this.serverForm.value;
     console.log(server);
-    if (this.editMode) {
-      this._updateServer(server);
-    } else {
-      this._addServer(server);
-    }
+
+    this._addServer(server);
   }
 
   goBack() {
@@ -74,22 +71,26 @@ export class ServerFormComponent implements OnInit {
   }
 
   private _addServer(server: Server) {
-    this.serverService.createServer(server).subscribe();
-  }
-
-  private _updateServer(server: Server) {
-    this.serverService.updateServerById(server).subscribe();
-  }
-
-  private _checkEditMode() {
-    this.route.params.subscribe((params) => {
-      if (params.id) {
-        this.editMode = true;
-        this.serverId = params.id;
-        this.serverService.getServerById(params.id).subscribe((server) => {
-          this.serverForm.setValue(server);
+    this.serverService.createServer(server).subscribe(
+      (server) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Server',
+          detail: `The ${server.name} was Added`,
+        });
+        timer(2000)
+          .toPromise()
+          .then(() => {
+            this.location.back();
+          });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Error ${error.status}`,
         });
       }
-    });
+    );
   }
 }

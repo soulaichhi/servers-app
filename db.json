@@ -172,6 +172,51 @@
         }
       ],
       "id": 3
+    },
+    {
+      "name": "Server4",
+      "ipAddress": "192.123.0.1",
+      "sites": [
+        {
+          "name": "youtube",
+          "domainName": "www.youtube.com",
+          "ipAddress": "192.123.0.0",
+          "active": false
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Server5",
+      "ipAddress": "192.123.0.1",
+      "sites": [
+        {
+          "name": "google",
+          "domainName": "www.google.com",
+          "ipAddress": "192.123.0.1",
+          "active": false
+        }
+      ],
+      "id": 5
+    },
+    {
+      "name": "Server6",
+      "ipAddress": "222.123.0.1",
+      "sites": [
+        {
+          "name": "youtube",
+          "domainName": "www.youtube.com",
+          "ipAddress": "192.168.0.3",
+          "active": false
+        },
+        {
+          "name": "linkedin",
+          "domainName": "www.linkedin.com",
+          "ipAddress": "192.168.0.3",
+          "active": false
+        }
+      ],
+      "id": 6
     }
   ]
 }

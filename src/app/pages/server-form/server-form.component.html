@@ -1,9 +1,6 @@
-<!--<p-toast></p-toast>-->
+<p-toast></p-toast>
 <div>
-  <p-card
-    [header]="editMode ? 'Edit Server' : 'Add Server'"
-    subheader="You can add or edit Server"
-  >
+  <p-card header="Add Server" subheader="You can add or edit Server">
     <div class="grid mb-5">
       <div class="col-12">
         <p-toolbar>
@@ -11,9 +8,9 @@
           <div class="p-toolbar-group-right">
             <button
               (click)="onSubmit()"
-              [label]="editMode ? 'Update' : 'Create'"
               class="p-button-success mr-2"
               icon="pi pi-plus"
+              label="Create"
               pButton
               type="button"
             ></button>
