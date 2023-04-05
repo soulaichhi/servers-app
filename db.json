@@ -153,6 +153,25 @@
           "active": true
         }
       ]
+    },
+    {
+      "name": "Server3",
+      "ipAddress": "192.168.0.3",
+      "sites": [
+        {
+          "name": "linkedin",
+          "domainName": "www.linkedin.com",
+          "ipAddress": "192.168.0.2",
+          "active": false
+        },
+        {
+          "name": "facebook",
+          "domainName": "www.facebook.com",
+          "ipAddress": "192.168.0.1",
+          "active": false
+        }
+      ],
+      "id": 3
     }
   ]
 }

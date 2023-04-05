@@ -31,27 +31,27 @@
     </div>
     <div class="grid">
       <div class="col-12">
-        <form (ngSubmit)="onSubmit()" [formGroup]="serverForm">
+        <form [formGroup]="serverForm">
           <div class="card">
             <div class="grid formgrid">
-              <div class="field col-3">
-                <label for="serverName">server Name </label>
+              <div class="field col-6">
+                <label for="servername">server Name </label>
                 <input
                   class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  formControlName="serverName"
-                  id="serverName"
-                  name="serverName"
+                  formControlName="name"
+                  id="servername"
+                  name="name"
                   type="text"
                 />
                 <small class="p-error">Name is Required</small>
               </div>
-              <div class="field col-3">
-                <label for="serverIpAddress">server Ip Address </label>
+              <div class="field col-6">
+                <label for="serveripAddress">server Ip Address </label>
                 <input
                   class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  formControlName="serverIpAddress"
-                  id="serverIpAddress"
-                  name="serverIpAddress"
+                  formControlName="ipAddress"
+                  id="serveripAddress"
+                  name="ipAddress"
                   type="text"
                 />
                 <small class="p-error">server Ip Address</small>
@@ -67,11 +67,15 @@
               class="grid formgrid"
             >
               <ng-container [formGroupName]="i">
+                <div class="col-1">
+                  <span>{{ i }}</span>
+                </div>
                 <div class="field col-2">
                   <label for="siteName">site Name </label>
+
                   <input
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    formControlName="siteName"
+                    formControlName="name"
                     id="siteName"
                     name="siteName"
                     type="text"
@@ -100,7 +104,7 @@
                   />
                   <small class="p-error">ipAddress is Required</small>
                 </div>
-                <div class="field col-2">
+                <div class="field col-1">
                   <label for="active">Active </label><br />
                   <p-inputSwitch
                     formControlName="active"
