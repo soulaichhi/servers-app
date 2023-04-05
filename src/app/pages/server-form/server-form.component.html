@@ -40,7 +40,11 @@
                   name="name"
                   type="text"
                 />
-                <small class="p-error">Name is Required</small>
+                <small
+                  *ngIf="serverForm.controls.name.invalid && isSubmitted"
+                  class="p-error"
+                  >Name is Required</small
+                >
               </div>
               <div class="field col-6">
                 <label for="serveripAddress">server Ip Address </label>
@@ -51,7 +55,11 @@
                   name="ipAddress"
                   type="text"
                 />
-                <small class="p-error">server Ip Address</small>
+                <small
+                  *ngIf="serverForm.controls.ipAddress.invalid && isSubmitted"
+                  class="p-error"
+                  >server Ip Address is Required</small
+                >
               </div>
             </div>
           </div>
@@ -77,7 +85,6 @@
                     name="siteName"
                     type="text"
                   />
-                  <small class="p-error">site Name is Required</small>
                 </div>
                 <div class="field col-3">
                   <label for="domainName">domain Name </label>
@@ -88,7 +95,6 @@
                     name="domainName"
                     type="text"
                   />
-                  <small class="p-error">domain Name is Required</small>
                 </div>
                 <div class="field col-3">
                   <label for="ipAddress">ip Address </label>
@@ -99,7 +105,6 @@
                     name="ipAddress"
                     type="text"
                   />
-                  <small class="p-error">ipAddress is Required</small>
                 </div>
                 <div class="field col-1">
                   <label for="active">Active </label><br />

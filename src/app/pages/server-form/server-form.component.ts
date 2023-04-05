@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Server } from '../../models/server.model';
 import { Location } from '@angular/common';
 import { ServersService } from '../../services/servers.service';
@@ -31,8 +31,8 @@ export class ServerFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.serverForm = this.fb.group({
-      name: '',
-      ipAddress: '',
+      name: ['', Validators.required],
+      ipAddress: ['', Validators.required],
       sites: this.fb.array([]),
     });
   }
@@ -44,9 +44,14 @@ export class ServerFormComponent implements OnInit, OnDestroy {
 
   newSite(): FormGroup {
     return this.fb.group({
-      name: '',
-      domainName: '',
-      ipAddress: '',
+      name: [''],
+      domainName: [''],
+      ipAddress: [
+        '',
+        Validators.pattern(
+          '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+        ),
+      ],
       active: false,
     });
   }

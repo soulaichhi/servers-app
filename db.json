@@ -174,49 +174,30 @@
       "id": 3
     },
     {
-      "name": "Server4",
-      "ipAddress": "192.123.0.1",
+      "name": "sss",
+      "ipAddress": "ssss",
       "sites": [
         {
-          "name": "youtube",
-          "domainName": "www.youtube.com",
-          "ipAddress": "192.123.0.0",
+          "name": "ssss",
+          "domainName": "sssss",
+          "ipAddress": "192.168.0.3",
           "active": false
         }
       ],
       "id": 4
     },
     {
-      "name": "Server5",
+      "name": "Guest",
       "ipAddress": "192.123.0.1",
       "sites": [
         {
-          "name": "google",
-          "domainName": "www.google.com",
-          "ipAddress": "192.123.0.1",
+          "name": "sss",
+          "domainName": "ddd",
+          "ipAddress": "222.123.0.1",
           "active": false
         }
       ],
       "id": 5
-    },
-    {
-      "name": "Server6",
-      "ipAddress": "222.123.0.1",
-      "sites": [
-        {
-          "name": "youtube",
-          "domainName": "www.youtube.com",
-          "ipAddress": "192.168.0.3",
-          "active": false
-        },
-        {
-          "name": "linkedin",
-          "domainName": "www.linkedin.com",
-          "ipAddress": "192.168.0.3",
-          "active": false
-        }
-      ],
-      "id": 6
     }
   ]
 }
