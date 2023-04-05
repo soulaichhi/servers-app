@@ -21,9 +21,9 @@ export class ServersService {
     return this.http.get<Server>(`${this.baseUrl}/${id}`);
   }
 
-  // updateServerById(serverId: number, serverData: any): Observable<Server> {
-  //   return this.http.put<Server>(`${this.url}/${serverId}`, serverData);
-  // }
+  updateServerById(serverId: number, serverData: Server): Observable<Server> {
+    return this.http.put<Server>(`${this.baseUrl}/${serverId}`, serverData);
+  }
 
   createServer(server: Server): Observable<Server> {
     return this.http.post<Server>(this.baseUrl, server);
