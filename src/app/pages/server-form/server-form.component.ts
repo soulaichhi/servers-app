@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Server } from '../../models/server.model';
 import { Location } from '@angular/common';
 import { ServersService } from '../../services/servers.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'app-server-form',
   templateUrl: './server-form.component.html',
   styleUrls: ['./server-form.component.scss'],
 })
-export class ServerFormComponent implements OnInit {
+export class ServerFormComponent implements OnInit, OnDestroy {
   serverForm!: FormGroup;
   isSubmitted = false;
+  endSubs$: Subject<any> = new Subject<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,11 @@ export class ServerFormComponent implements OnInit {
       ipAddress: '',
       sites: this.fb.array([]),
     });
+  }
+
+  ngOnDestroy() {
+    this.endSubs$.next(true);
+    this.endSubs$.complete();
   }
 
   newSite(): FormGroup {
@@ -61,7 +67,7 @@ export class ServerFormComponent implements OnInit {
 
     //console.log(this.serverForm.value);
     const server: Server = this.serverForm.value;
-    console.log(server);
+    //console.log(server);
 
     this._addServer(server);
   }
@@ -71,26 +77,29 @@ export class ServerFormComponent implements OnInit {
   }
 
   private _addServer(server: Server) {
-    this.serverService.createServer(server).subscribe(
-      (server) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Server',
-          detail: `The ${server.name} was Added`,
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.location.back();
+    this.serverService
+      .createServer(server)
+      .pipe(takeUntil(this.endSubs$))
+      .subscribe(
+        (server) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Server',
+            detail: `The ${server.name} was Added`,
           });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `Error ${error.status}`,
-        });
-      }
-    );
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `Error ${error.status}`,
+          });
+        }
+      );
   }
 }
