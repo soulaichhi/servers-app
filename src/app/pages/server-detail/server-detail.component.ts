@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServersService } from '../../services/servers.service';
 import { Server } from '../../models/server.model';
+import { Site } from '../../models/site.model';
 
 @Component({
   selector: 'app-server-detail',
@@ -31,6 +32,10 @@ export class ServerDetailComponent implements OnInit {
     // this.route.params.subscribe((params) => {
     //   console.log(params);
     // });
+  }
+
+  deleteSite(id: number) {
+    this.server.sites?.splice(id - 1, 1);
   }
 
   private _getServer(id: string) {
