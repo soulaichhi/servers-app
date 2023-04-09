@@ -71,7 +71,12 @@ export class ServerFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isSubmitted = true;
-    const server: Server = this.serverForm.value;
+    const server: Server = {
+      id: this.currentId,
+      name: this.serverForm.controls.name.value,
+      ipAddress: this.serverForm.controls.ipAddress.value,
+      sites: this.serverForm.controls.sites.value,
+    };
     if (!this.editeMode) {
       if (this.serverForm.invalid) {
         return;
@@ -161,6 +166,7 @@ export class ServerFormComponent implements OnInit, OnDestroy {
             this.sites.push(sitesForm);
           });
           this.serverForm.patchValue({
+            id: this.currentId,
             name: this.server.name,
             ipAddress: this.server.ipAddress,
           });
