@@ -28,15 +28,10 @@
             [subheader]="server.ipAddress!"
             class="server-item-card"
           >
-            <ul class="server-item-sites">
-              <li
-                *ngFor="let site of server.sites"
-                class="server-item-sites-site"
-              >
-                <span><i class="pi pi-chevron-right"></i></span>
-                <span> {{ site.name }}</span>
-              </li>
-            </ul>
+            <div>
+              <span>Sites:</span>
+              <span>{{ server.sites!.length! }}</span>
+            </div>
             <div class="server-item-tools">
               <p-button
                 (onClick)="removeServer(server.id!)"
@@ -51,7 +46,7 @@
               <p-button
                 (onClick)="updateServer(server.id!)"
                 icon="pi pi-pencil"
-                styleClass="p-button-rounded"
+                styleClass="p-button-rounded p-button-success"
               ></p-button>
             </div>
           </p-card>

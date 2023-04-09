@@ -168,19 +168,6 @@
       ]
     },
     {
-      "name": "sss",
-      "ipAddress": "ssss",
-      "sites": [
-        {
-          "name": "ssss",
-          "domainName": "sssss",
-          "ipAddress": "192.168.0.3",
-          "active": false
-        }
-      ],
-      "id": 4
-    },
-    {
       "name": "sever5",
       "ipAddress": "192.123.0.1",
       "sites": [
