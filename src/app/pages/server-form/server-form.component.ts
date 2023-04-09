@@ -124,54 +124,60 @@ export class ServerFormComponent implements OnInit, OnDestroy {
   }
 
   private _updateServer(server: Server) {
-    this.serverService.updateServerById(server).subscribe(
-      (server) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Server',
-          detail: `The ${server.name} was Updated`,
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.location.back();
+    this.serverService
+      .updateServerById(server)
+      .pipe(takeUntil(this.endSubs$))
+      .subscribe(
+        (server) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Server',
+            detail: `The ${server.name} was Updated`,
           });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `Error ${error.status}`,
-        });
-      }
-    );
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `Error ${error.status}`,
+          });
+        }
+      );
   }
 
   private _cheEditMode() {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.endSubs$)).subscribe((params) => {
       if (params.id) {
         this.editeMode = true;
         this.currentId = params.id;
-        this.serverService.getServerById(params.id).subscribe((server) => {
-          this.server = server;
-          console.log(server);
-          this.server.sites?.map((site: Site) => {
-            const sitesForm = this.fb.group({
-              name: site.name,
-              domainName: site.domainName,
-              ipAddress: site.ipAddress,
-              active: site.active,
-            });
+        this.serverService
+          .getServerById(params.id)
+          .pipe(takeUntil(this.endSubs$))
+          .subscribe((server) => {
+            this.server = server;
+            console.log(server);
+            this.server.sites?.map((site: Site) => {
+              const sitesForm = this.fb.group({
+                name: site.name,
+                domainName: site.domainName,
+                ipAddress: site.ipAddress,
+                active: site.active,
+              });
 
-            this.sites.push(sitesForm);
+              this.sites.push(sitesForm);
+            });
+            this.serverForm.patchValue({
+              id: this.currentId,
+              name: this.server.name,
+              ipAddress: this.server.ipAddress,
+            });
+            console.log(this.serverForm.value);
           });
-          this.serverForm.patchValue({
-            id: this.currentId,
-            name: this.server.name,
-            ipAddress: this.server.ipAddress,
-          });
-          console.log(this.serverForm.value);
-        });
       }
     });
   }

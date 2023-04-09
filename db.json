@@ -156,35 +156,71 @@
     },
     {
       "id": 3,
-      "name": "Server3",
+      "name": "Serveur 3",
       "ipAddress": "192.168.0.3",
       "sites": [
         {
-          "name": "linkedin",
-          "domainName": "www.linkedin.com",
-          "ipAddress": "192.168.0.2",
+          "id": 21,
+          "name": "Site 21",
+          "domainName": "www.site21.com",
+          "ipAddress": "192.168.0.3",
+          "active": true
+        },
+        {
+          "id": 22,
+          "name": "Site 22",
+          "domainName": "www.site22.com",
+          "ipAddress": "192.168.0.3",
           "active": false
+        },
+        {
+          "id": 23,
+          "name": "Site 23",
+          "domainName": "www.site23.com",
+          "ipAddress": "192.168.0.3",
+          "active": true
+        },
+        {
+          "id": 24,
+          "name": "Site 24",
+          "domainName": "www.site24.com",
+          "ipAddress": "192.168.0.3",
+          "active": true
+        },
+        {
+          "id": 25,
+          "name": "Site 25",
+          "domainName": "www.site25.com",
+          "ipAddress": "192.168.0.3",
+          "active": false
+        },
+        {
+          "id": 26,
+          "name": "Site 26",
+          "domainName": "www.site26.com",
+          "ipAddress": "192.168.0.3",
+          "active": true
         }
       ]
     },
     {
-      "name": "sever5",
+      "name": "Server4",
       "ipAddress": "192.123.0.1",
       "sites": [
         {
-          "name": "site44",
-          "domainName": "www.site44.com",
-          "ipAddress": "192.123.0.1",
+          "name": "Github",
+          "domainName": "www.github.com",
+          "ipAddress": "222.123.0.1",
           "active": true
         },
         {
-          "name": "site55",
-          "domainName": "www.site55.com",
-          "ipAddress": "192.168.0.3",
+          "name": "Maroc",
+          "domainName": "www.maroc.com",
+          "ipAddress": "222.123.0.1",
           "active": false
         }
       ],
-      "id": 5
+      "id": 4
     }
   ]
 }

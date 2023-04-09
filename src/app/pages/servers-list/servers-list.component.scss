@@ -10,3 +10,13 @@
     margin-right: 10px;
   }
 }
+
+.server-sites {
+  display: flex;
+  column-gap: 20px;
+
+  span {
+    display: block;
+    font-weight: bold;
+  }
+}

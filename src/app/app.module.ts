@@ -19,6 +19,8 @@ import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { StyleClassModule } from 'primeng/styleclass';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
+    StyleClassModule,
+    TagModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],

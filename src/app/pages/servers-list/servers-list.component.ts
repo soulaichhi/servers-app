@@ -33,9 +33,12 @@ export class ServersListComponent implements OnInit, OnDestroy {
   }
 
   removeServer(id: number) {
-    this.serverService.deleteServer(id).subscribe(() => {
-      this._getServersList();
-    });
+    this.serverService
+      .deleteServer(id)
+      .pipe(takeUntil(this.endSubs$))
+      .subscribe(() => {
+        this._getServersList();
+      });
   }
 
   private _getServersList() {
