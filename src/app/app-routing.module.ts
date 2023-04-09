@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: ServersListComponent },
   { path: ':id', component: ServerDetailComponent },
   { path: 'server/form', component: ServerFormComponent },
+  { path: 'server/form/:id', component: ServerFormComponent },
 ];
 
 @NgModule({

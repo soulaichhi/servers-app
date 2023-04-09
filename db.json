@@ -187,13 +187,19 @@
       "id": 4
     },
     {
-      "name": "Guest",
+      "name": "sever5",
       "ipAddress": "192.123.0.1",
       "sites": [
         {
-          "name": "sss",
-          "domainName": "ddd",
-          "ipAddress": "222.123.0.1",
+          "name": "site44",
+          "domainName": "www.site44.com",
+          "ipAddress": "192.123.0.1",
+          "active": true
+        },
+        {
+          "name": "site55",
+          "domainName": "www.site55.com",
+          "ipAddress": "192.168.0.3",
           "active": false
         }
       ],

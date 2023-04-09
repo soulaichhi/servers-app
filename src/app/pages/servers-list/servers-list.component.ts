@@ -28,6 +28,10 @@ export class ServersListComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/${id}`);
   }
 
+  updateServer(serverId: number) {
+    this.router.navigateByUrl(`/server/form/${serverId}`);
+  }
+
   removeServer(id: number) {
     this.serverService.deleteServer(id).subscribe(() => {
       this._getServersList();

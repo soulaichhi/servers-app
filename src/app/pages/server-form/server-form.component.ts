@@ -5,7 +5,8 @@ import { Location } from '@angular/common';
 import { ServersService } from '../../services/servers.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Subject, takeUntil, timer } from 'rxjs';
+import { findIndex, Subject, takeUntil, timer } from 'rxjs';
+import { Site } from '../../models/site.model';
 
 @Component({
   selector: 'app-server-form',
@@ -16,6 +17,9 @@ export class ServerFormComponent implements OnInit, OnDestroy {
   serverForm!: FormGroup;
   isSubmitted = false;
   endSubs$: Subject<any> = new Subject<any>();
+  currentId!: number;
+  server!: Server;
+  editeMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +39,7 @@ export class ServerFormComponent implements OnInit, OnDestroy {
       ipAddress: ['', Validators.required],
       sites: this.fb.array([]),
     });
+    this._cheEditMode();
   }
 
   ngOnDestroy() {
@@ -66,15 +71,20 @@ export class ServerFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isSubmitted = true;
-    if (this.serverForm.invalid) {
-      return;
-    }
-
-    //console.log(this.serverForm.value);
     const server: Server = this.serverForm.value;
-    //console.log(server);
+    if (!this.editeMode) {
+      if (this.serverForm.invalid) {
+        return;
+      }
 
-    this._addServer(server);
+      //console.log(this.serverForm.value);
+
+      //console.log(server);
+
+      this._addServer(server);
+    } else {
+      this._updateServer(server);
+    }
   }
 
   goBack() {
@@ -106,5 +116,57 @@ export class ServerFormComponent implements OnInit, OnDestroy {
           });
         }
       );
+  }
+
+  private _updateServer(server: Server) {
+    this.serverService.updateServerById(server).subscribe(
+      (server) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Server',
+          detail: `The ${server.name} was Updated`,
+        });
+        timer(2000)
+          .toPromise()
+          .then(() => {
+            this.location.back();
+          });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Error ${error.status}`,
+        });
+      }
+    );
+  }
+
+  private _cheEditMode() {
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.editeMode = true;
+        this.currentId = params.id;
+        this.serverService.getServerById(params.id).subscribe((server) => {
+          this.server = server;
+          console.log(server);
+          this.server.sites?.map((site: Site) => {
+            const sitesForm = this.fb.group({
+              name: site.name,
+              domainName: site.domainName,
+              ipAddress: site.ipAddress,
+              active: site.active,
+            });
+
+            this.sites.push(sitesForm);
+          });
+          this.serverForm.patchValue({
+            name: this.server.name,
+            ipAddress: this.server.ipAddress,
+          });
+          console.log(this.serverForm.value);
+        });
+      }
+    });
   }
 }
