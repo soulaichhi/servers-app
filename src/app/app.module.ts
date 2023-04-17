@@ -21,6 +21,10 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { StyleClassModule } from 'primeng/styleclass';
 import { TagModule } from 'primeng/tag';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ServersReducer } from './ngrx/servers.reducer';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { TagModule } from 'primeng/tag';
     ReactiveFormsModule,
     ToastModule,
     StyleClassModule,
+
     TagModule,
+    StoreModule.forRoot({ serversState: ServersReducer }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],
