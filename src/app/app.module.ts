@@ -25,6 +25,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ServersReducer } from './ngrx/servers.reducer';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchServersComponent } from './components/search-servers/search-servers.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,9 @@ import { ServersReducer } from './ngrx/servers.reducer';
     ServersListComponent,
     ServerDetailComponent,
     ServerFormComponent,
+    HeaderComponent,
+    FooterComponent,
+    SearchServersComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +58,8 @@ import { ServersReducer } from './ngrx/servers.reducer';
     ReactiveFormsModule,
     ToastModule,
     StyleClassModule,
+    FormsModule,
+    Ng2SearchPipeModule,
 
     TagModule,
     StoreModule.forRoot({ serversState: ServersReducer }),
