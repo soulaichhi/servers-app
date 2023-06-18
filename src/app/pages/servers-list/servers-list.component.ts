@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ServersService } from '../../services/servers.service';
 import { Server } from '../../models/server.model';
 import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { ServersState, ServersStateEnum } from '../../ngrx/servers.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-servers-list',
@@ -12,11 +14,20 @@ import { Subject, takeUntil } from 'rxjs';
 export class ServersListComponent implements OnInit, OnDestroy {
   serversList: Server[] = [];
   endSubs$: Subject<any> = new Subject<any>();
+  serversState$!: Observable<ServersState>;
+  readonly ServersStateEnum = ServersStateEnum;
 
-  constructor(private router: Router, private serverService: ServersService) {}
+  constructor(
+    private store: Store<any>,
+    private router: Router,
+    private serverService: ServersService
+  ) {}
 
   ngOnInit() {
     this._getServersList();
+    this.serversState$ = this.store.pipe(
+      map((state) => state.serversListState)
+    );
   }
 
   ngOnDestroy() {

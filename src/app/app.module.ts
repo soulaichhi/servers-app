@@ -29,6 +29,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchServersComponent } from './components/search-servers/search-servers.component';
+import { ServersEffects } from './ngrx/servers.effects';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,9 @@ import { SearchServersComponent } from './components/search-servers/search-serve
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    StoreModule.forRoot({ serversListState: ServersReducer }),
+    EffectsModule.forRoot([ServersEffects]),
+    StoreDevtoolsModule.instrument(),
     AppRoutingModule,
     CardModule,
     ToolbarModule,
@@ -62,9 +66,6 @@ import { SearchServersComponent } from './components/search-servers/search-serve
     Ng2SearchPipeModule,
 
     TagModule,
-    StoreModule.forRoot({ serversState: ServersReducer }),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument(),
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],
